@@ -160,5 +160,6 @@ chrome.storage.onChanged.addListener((changes, area) => {
   const { settings, cache } = await render();
   // All'apertura: rete solo se la cache è più vecchia dell'intervallo configurato.
   const age = Date.now() - cache.updatedAt;
-  if (age > settings.refreshMinutes * 60_000) requestRefresh(false);
+  const hasErrors = Object.keys(cache.errors).length > 0;
+  if (age > settings.refreshMinutes * 60_000 || hasErrors) requestRefresh(false);   // MIN_GAP nel worker evita spam
 })();
