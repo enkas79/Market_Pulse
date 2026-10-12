@@ -124,12 +124,14 @@ async function render() {
   if (!shown) {
     const empty = document.createElement('div');
     empty.className = 'empty';
-    empty.textContent = cache.updatedAt ? 'Nessun dato disponibile.' : 'Caricamento dati…';
+    empty.textContent = cache.errors._global
+      ? `Errore: ${cache.errors._global}`
+      : cache.updatedAt ? 'Nessun dato disponibile.' : 'Caricamento dati…';
     content.appendChild(empty);
   }
 
   // Footer: orario ultimo aggiornamento + avviso se ci sono errori.
-  const errCount = Object.keys(cache.errors).length;
+  const errCount = Object.keys(cache.errors).filter((k) => k !== '_global').length;
   const time = cache.updatedAt
     ? new Date(cache.updatedAt).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })
     : '—';

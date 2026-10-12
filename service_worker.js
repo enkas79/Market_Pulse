@@ -39,7 +39,9 @@ chrome.storage.onChanged.addListener((changes, area) => {
 // Richieste dal popup.
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (msg?.type === 'refresh') {
-    refreshAll({ force: !!msg.force }).then(() => sendResponse({ ok: true }));
+    refreshAll({ force: !!msg.force })
+      .then(() => sendResponse({ ok: true }))
+      .catch((e) => sendResponse({ ok: false, error: e.message }));
     return true; // risposta asincrona
   }
 });
@@ -48,7 +50,16 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 let inflight = null; // evita giri paralleli (alarm + popup)
 
 function refreshAll(opts = {}) {
-  if (!inflight) inflight = doRefresh(opts).finally(() => { inflight = null; });
+  if (!inflight) {
+    inflight = doRefresh(opts)
+      .catch(async (e) => {
+        // Errore imprevisto: lo salvo in cache così il popup lo mostra invece di restare in "Caricamento".
+        console.error('Market Pulse refresh failed', e);
+        const cache = await getCache();
+        await saveCache({ ...cache, errors: { ...cache.errors, _global: String(e?.message || e) }, lastAttempt: Date.now() });
+      })
+      .finally(() => { inflight = null; });
+  }
   return inflight;
 }
 
