@@ -32,9 +32,27 @@ function valueText(asset, q) {
   return v;
 }
 
+// Riga senza dati: nome + motivo dell'errore (visibile, non solo in tooltip).
+function emptyRow(el, asset, error) {
+  const name = document.createElement('div');
+  name.className = 'name';
+  name.textContent = asset.label;
+  const err = document.createElement('small');
+  err.className = 'err';
+  err.textContent = error || 'in attesa di dati';
+  err.title = error || '';
+  name.appendChild(err);
+  const v = document.createElement('span');
+  v.className = 'value';
+  v.textContent = 'n/d';
+  el.append(name, v);
+  return el;
+}
+
 function row(asset, q, error) {
   const el = document.createElement('div');
   el.className = 'row';
+  if (!q) return emptyRow(el, asset, error);   // nessun dato in cache: mostro l'errore
   const c = change(asset, q);
 
   const name = document.createElement('div');
@@ -91,7 +109,7 @@ async function render() {
   let shown = 0;
   for (const group of Object.keys(GROUP_LABELS)) {
     const rows = enabled
-      .filter((a) => a.group === group && cache.data[a.id])
+      .filter((a) => a.group === group && (cache.data[a.id] || cache.errors[a.id]))
       .map((a) => row(a, cache.data[a.id], cache.errors[a.id]));
     if (!rows.length) continue;
     const card = document.createElement('section');

@@ -72,6 +72,7 @@ h1 { margin: 0; font-size: 15px; font-weight: 650; }
 .name { font-weight: 550; }
 .name small { display: block; color: var(--warn); font-weight: 400; font-size: 10.5px; }
 .name small.sub { color: var(--muted); }
+.name small.err { color: var(--down); max-width: 230px; word-break: break-word; }
 .vals { display: flex; align-items: center; gap: 8px; }
 .value { font-variant-numeric: tabular-nums; font-weight: 600; }
 .pill {
