@@ -135,18 +135,29 @@ async function render() {
   const time = cache.updatedAt
     ? new Date(cache.updatedAt).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })
     : '—';
-  $('status').textContent = `Aggiornato alle ${time}` + (errCount ? ` · ${errCount} fonti con errori` : '');
+  $('status').textContent = `Aggiornato alle ${time}` + (errCount ? ` · ${errCount} fonti con errori` : '') + ` · v${chrome.runtime.getManifest().version}`;
   document.querySelector('footer').classList.toggle('stale', errCount > 0);
 
   return { settings, cache };
+}
+
+function showProblem(msg) {
+  $('status').textContent = `Errore: ${msg}`;
+  document.querySelector('footer').classList.add('stale');
+  const empty = document.querySelector('.empty');
+  if (empty) empty.textContent = `Errore: ${msg}`;
 }
 
 async function requestRefresh(force) {
   const btn = $('refresh');
   btn.classList.add('spin');
   try {
-    await chrome.runtime.sendMessage({ type: 'refresh', force });
-  } catch (_) { /* service worker non raggiungibile: resta la cache */ }
+    const res = await chrome.runtime.sendMessage({ type: 'refresh', force });
+    if (res && res.ok === false) showProblem(res.error);
+  } catch (e) {
+    // Service worker non raggiungibile (es. errore di caricamento): lo rendo visibile.
+    showProblem(`service worker non raggiungibile (${e.message}). Controlla "Errori" in chrome://extensions`);
+  }
   btn.classList.remove('spin');
 }
 
