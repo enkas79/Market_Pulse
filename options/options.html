@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Market Pulse – Impostazioni</title>
+  <link rel="stylesheet" href="../popup/popup.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <h1>Impostazioni</h1>
+
+  <section class="card">
+    <h2>Asset attivi</h2>
+    <div id="assets"></div>
+  </section>
+
+  <section class="card">
+    <h2>Aggiornamento</h2>
+    <label class="field">Intervallo di refresh
+      <select id="refreshMinutes">
+        <option value="5">5 minuti</option>
+        <option value="15">15 minuti</option>
+        <option value="30">30 minuti</option>
+        <option value="60">60 minuti</option>
+      </select>
+    </label>
+    <label class="field">Valore sul badge dell'icona
+      <select id="badgeMode">
+        <option value="spread">Spread BTP/Bund (bps)</option>
+        <option value="vix">VIX</option>
+        <option value="none">Nessuno</option>
+      </select>
+    </label>
+  </section>
+
+  <section class="card">
+    <h2>API key (opzionale)</h2>
+    <label class="field">FRED – fallback mensile per BTP/Bund
+      <input id="fredApiKey" type="password" autocomplete="off" spellcheck="false" placeholder="chiave gratuita da fred.stlouisfed.org">
+    </label>
+    <p class="hint">La chiave resta in <code>chrome.storage.local</code> sul tuo dispositivo e viene inviata solo a api.stlouisfed.org.</p>
+  </section>
+
+  <button id="save" class="primary">Salva</button>
+  <span id="saved" class="hint" hidden>Salvato ✓</span>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>
