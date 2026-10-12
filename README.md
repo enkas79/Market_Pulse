@@ -1,16 +1,18 @@
 # Market Pulse
 
-Estensione Chrome (Manifest V3) "click-to-view": rendimenti (BTP/Bund/UST), spread BTP/Bund in bps, VIX, indici/ETF/EURUSD e stato delle borse (Milano, Francoforte, New York). Nessun tracking, JS/CSS vanilla locali, permessi: `storage`, `alarms` (+ host permission verso Yahoo Finance, Stooq, FRED).
+Estensione Chrome (Manifest V3) "click-to-view": rendimenti (BTP/Bund/UST), spread BTP/Bund in bps, VIX, indici/ETF/EURUSD e stato delle borse (Milano, Francoforte, New York). Nessun tracking, JS/CSS vanilla locali, permessi: `storage`, `alarms` (+ host permission verso Yahoo Finance e BCE).
 
 ## Collaudo in modalità sviluppatore
 1. Apri `chrome://extensions` e attiva **Modalità sviluppatore**.
 2. **Carica estensione non pacchettizzata** e seleziona la cartella del progetto (quella con `manifest.json`).
 3. Fissa l'icona dal menu puzzle, clicca per aprire il popup. Il badge mostra lo spread (o il VIX).
 4. Debug: in `chrome://extensions` → "service worker" per la console in background; tasto destro sul popup → Ispeziona.
-5. Impostazioni: icona ⚙ nel popup (asset, intervallo, badge, API key FRED).
+5. Impostazioni: icona ⚙ nel popup (asset, intervallo, badge).
 
 ## Fonti dati e limiti
-- Yahoo Finance (endpoint JSON `chart`, non ufficiale): VIX, S&P 500, UST 10Y, VWCE, EUR/USD.
-- Stooq (CSV): BTP/Bund 10Y. Fallback FRED (mensile, richiede API key gratuita).
-- Gli endpoint non sono garantiti: in caso di errore/rate limit resta l'ultimo dato in cache con avviso "non aggiornato".
+Solo endpoint pubblici aperti, nessuna API key né registrazione.
+- Yahoo Finance (endpoint JSON `chart`, non ufficiale): VIX, S&P 500, UST 10Y (`^TNX`), VWCE.DE, FTSE MIB, DAX.
+- BCE (`data-api.ecb.europa.eu`): EUR/USD (tasso di riferimento giornaliero) e rendimenti BTP/Bund 10Y (dataset IRS, **mensili**). Lo spread BTP/Bund è quindi mensile, non intraday.
+- Yahoo non offre simboli verificati per BTP/Bund giornalieri: per averli servirebbe un'altra fonte.
+- In caso di errore/rate limit resta l'ultimo dato in cache con avviso "non aggiornato".
 - Orari borse: festività non gestite.

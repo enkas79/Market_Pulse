@@ -46,6 +46,12 @@ function row(asset, q, error) {
     warn.title = error;
     name.appendChild(warn);
   }
+  if (q.freq === 'monthly') {        // dato non giornaliero: mostro il periodo di riferimento
+    const sub = document.createElement('small');
+    sub.className = 'sub';
+    sub.textContent = `mensile · ${new Date(q.asOf).toLocaleDateString('it-IT', { month: 'short', year: 'numeric' })}`;
+    name.appendChild(sub);
+  }
 
   const vals = document.createElement('div');
   vals.className = 'vals';

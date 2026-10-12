@@ -64,7 +64,7 @@ async function doRefresh({ force = false } = {}) {
   for (const id of [...wanted]) getAsset(id)?.derived?.forEach((d) => wanted.add(d));
   const toFetch = ASSETS.filter((a) => wanted.has(a.id) && !a.derived);
 
-  const results = await Promise.allSettled(toFetch.map((a) => fetchAsset(a, settings)));
+  const results = await Promise.allSettled(toFetch.map((a) => fetchAsset(a)));
 
   const data = { ...cache.data };
   const errors = {};

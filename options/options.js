@@ -1,4 +1,4 @@
-// Pagina opzioni: asset attivi, intervallo, badge, API key opzionale.
+// Pagina opzioni: asset attivi, intervallo, badge.
 import { ASSETS } from '../lib/config.js';
 import { getSettings, saveSettings } from '../lib/storage.js';
 
@@ -21,14 +21,12 @@ const $ = (id) => document.getElementById(id);
 
   $('refreshMinutes').value = String(settings.refreshMinutes);
   $('badgeMode').value = settings.badgeMode;
-  $('fredApiKey').value = settings.fredApiKey;
 
   $('save').addEventListener('click', async () => {
     await saveSettings({
       enabledAssets: [...document.querySelectorAll('#assets input:checked')].map((c) => c.value),
       refreshMinutes: Number($('refreshMinutes').value),
-      badgeMode: $('badgeMode').value,
-      fredApiKey: $('fredApiKey').value.trim()
+      badgeMode: $('badgeMode').value
     });
     // Il service worker intercetta la modifica e riprogramma l'allarme.
     $('saved').hidden = false;
