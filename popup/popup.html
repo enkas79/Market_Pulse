@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,14 +8,14 @@
 </head>
 <body>
   <header>
-    <h1>Market Pulse</h1>
+    <h1 data-i18n="extName">Market Pulse</h1>
     <div class="actions">
-      <button id="refresh" title="Aggiorna ora" aria-label="Aggiorna ora">⟳</button>
-      <button id="settings" title="Impostazioni" aria-label="Impostazioni">⚙</button>
+      <button id="refresh" data-i18n-title="refreshNow" data-i18n-aria="refreshNow">⟳</button>
+      <button id="settings" data-i18n-title="settings" data-i18n-aria="settings">⚙</button>
     </div>
   </header>
 
-  <section id="markets" class="markets" aria-label="Stato delle borse"></section>
+  <section id="markets" class="markets" data-i18n-aria="marketsStatus"></section>
   <main id="content"></main>
 
   <footer>

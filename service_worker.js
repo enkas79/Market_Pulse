@@ -4,6 +4,7 @@ import { ASSETS, getAsset } from './lib/config.js';
 import { getSettings, getCache, saveCache } from './lib/storage.js';
 import { fetchAsset } from './lib/providers.js';
 import { anyMarketOpen } from './lib/markets.js';
+import { t } from './lib/i18n.js';
 
 const ALARM = 'refresh';
 const MIN_GAP_MS = 30_000;            // anti-spam: max un giro di fetch ogni 30s
@@ -129,6 +130,6 @@ async function updateBadge(settings, data) {
   await chrome.action.setBadgeText({ text });
   await chrome.action.setBadgeBackgroundColor({ color });
   await chrome.action.setTitle({
-    title: mode === 'spread' ? `Spread BTP/Bund: ${text} bps` : `VIX: ${text}`
+    title: t(mode === 'spread' ? 'badgeTitleSpread' : 'badgeTitleVix', text)
   });
 }

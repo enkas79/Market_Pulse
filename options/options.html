@@ -1,43 +1,43 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Market Pulse – Impostazioni</title>
+  <title>Market Pulse – Settings</title>
   <link rel="stylesheet" href="../popup/popup.css">
   <link rel="stylesheet" href="options.css">
 </head>
 <body>
-  <h1>Impostazioni</h1>
+  <h1 data-i18n="optionsHeading">Settings</h1>
 
   <section class="card">
-    <h2>Asset attivi</h2>
+    <h2 data-i18n="activeAssets">Active assets</h2>
     <div id="assets"></div>
   </section>
 
   <section class="card">
-    <h2>Aggiornamento</h2>
-    <label class="field">Intervallo di refresh
+    <h2 data-i18n="refreshSection">Refresh</h2>
+    <label class="field"><span data-i18n="refreshInterval">Refresh interval</span>
       <select id="refreshMinutes">
-        <option value="5">5 minuti</option>
-        <option value="15">15 minuti</option>
-        <option value="30">30 minuti</option>
-        <option value="60">60 minuti</option>
+        <option value="5" data-i18n="minutes5">5 minutes</option>
+        <option value="15" data-i18n="minutes15">15 minutes</option>
+        <option value="30" data-i18n="minutes30">30 minutes</option>
+        <option value="60" data-i18n="minutes60">60 minutes</option>
       </select>
     </label>
-    <label class="field">Valore sul badge dell'icona
+    <label class="field"><span data-i18n="badgeValue">Value shown on the icon badge</span>
       <select id="badgeMode">
-        <option value="spread">Spread BTP/Bund (bps)</option>
-        <option value="vix">VIX</option>
-        <option value="none">Nessuno</option>
+        <option value="spread" data-i18n="badgeSpread">BTP/Bund spread (bps)</option>
+        <option value="vix" data-i18n="badgeVix">VIX</option>
+        <option value="none" data-i18n="badgeNone">None</option>
       </select>
     </label>
   </section>
 
-  <p class="hint">Nessuna API key necessaria: solo endpoint pubblici (Yahoo Finance, BCE).</p>
+  <p class="hint" data-i18n="noKeyHint">No API key needed: public endpoints only (Yahoo Finance, ECB).</p>
 
-  <button id="save" class="primary">Salva</button>
-  <span id="saved" class="hint" hidden>Salvato ✓</span>
+  <button id="save" class="primary" data-i18n="save">Save</button>
+  <span id="saved" class="hint" data-i18n="saved" hidden>Saved ✓</span>
 
   <script type="module" src="options.js"></script>
 </body>

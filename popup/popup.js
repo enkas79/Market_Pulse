@@ -1,14 +1,15 @@
 // Popup: renderizza SOLO dalla cache locale. Il fetch lo fa il service worker.
-import { ASSETS, GROUP_LABELS } from '../lib/config.js';
+import { ASSETS, GROUPS } from '../lib/config.js';
+import { t, lang, assetLabel, marketLabel, localizeDom } from '../lib/i18n.js';
 import { getSettings, getCache } from '../lib/storage.js';
 import { MARKETS, isMarketOpen } from '../lib/markets.js';
 
 const $ = (id) => document.getElementById(id);
-const fmt = (n, d) => n.toLocaleString('it-IT', { minimumFractionDigits: d, maximumFractionDigits: d });
+const fmt = (n, d) => n.toLocaleString(lang, { minimumFractionDigits: d, maximumFractionDigits: d });
 
 // Calcola testo e classe (up/down/flat) della variazione in base al tipo di asset.
 function change(asset, q) {
-  if (q.prev == null) return { text: 'n/d', cls: 'flat' };
+  if (q.prev == null) return { text: t('na'), cls: 'flat' };
   const isBps = asset.kind === 'yield' || asset.kind === 'spread';
   const diff = q.value - q.prev;
   // Rendimenti: differenza in punti percentuali -> bps. Spread: già in bps.
@@ -36,15 +37,15 @@ function valueText(asset, q) {
 function emptyRow(el, asset, error) {
   const name = document.createElement('div');
   name.className = 'name';
-  name.textContent = asset.label;
+  name.textContent = assetLabel(asset);
   const err = document.createElement('small');
   err.className = 'err';
-  err.textContent = error || 'in attesa di dati';
+  err.textContent = error || t('waitingData');
   err.title = error || '';
   name.appendChild(err);
   const v = document.createElement('span');
   v.className = 'value';
-  v.textContent = 'n/d';
+  v.textContent = t('na');
   el.append(name, v);
   return el;
 }
@@ -57,17 +58,17 @@ function row(asset, q, error) {
 
   const name = document.createElement('div');
   name.className = 'name';
-  name.textContent = asset.label;
+  name.textContent = assetLabel(asset);
   if (error) {                       // dato mostrato ma non aggiornato
     const warn = document.createElement('small');
-    warn.textContent = '⚠ non aggiornato';
+    warn.textContent = t('notUpdated');
     warn.title = error;
     name.appendChild(warn);
   }
   if (q.freq === 'monthly') {        // dato non giornaliero: mostro il periodo di riferimento
     const sub = document.createElement('small');
     sub.className = 'sub';
-    sub.textContent = `mensile · ${new Date(q.asOf).toLocaleDateString('it-IT', { month: 'short', year: 'numeric' })}`;
+    sub.textContent = t('monthlyData', new Date(q.asOf).toLocaleDateString(lang, { month: 'short', year: 'numeric' }));
     name.appendChild(sub);
   }
 
@@ -91,10 +92,10 @@ function renderMarkets() {
     const open = isMarketOpen(m);
     const chip = document.createElement('div');
     chip.className = `chip ${open ? 'open' : ''}`;
-    chip.title = `${m.label}: ${open ? 'aperta' : 'chiusa'}`;
+    chip.title = `${marketLabel(m)}: ${open ? t('marketOpen') : t('marketClosed')}`;
     const dot = document.createElement('span');
     dot.className = 'dot';
-    chip.append(dot, document.createTextNode(m.label));
+    chip.append(dot, document.createTextNode(marketLabel(m)));
     return chip;
   }));
 }
@@ -107,7 +108,7 @@ async function render() {
 
   const enabled = ASSETS.filter((a) => settings.enabledAssets.includes(a.id));
   let shown = 0;
-  for (const group of Object.keys(GROUP_LABELS)) {
+  for (const group of GROUPS) {
     const rows = enabled
       .filter((a) => a.group === group && (cache.data[a.id] || cache.errors[a.id]))
       .map((a) => row(a, cache.data[a.id], cache.errors[a.id]));
@@ -115,7 +116,7 @@ async function render() {
     const card = document.createElement('section');
     card.className = 'card';
     const h = document.createElement('h2');
-    h.textContent = GROUP_LABELS[group];
+    h.textContent = t(`group_${group}`);
     card.append(h, ...rows);
     content.appendChild(card);
     shown += rows.length;
@@ -125,27 +126,27 @@ async function render() {
     const empty = document.createElement('div');
     empty.className = 'empty';
     empty.textContent = cache.errors._global
-      ? `Errore: ${cache.errors._global}`
-      : cache.updatedAt ? 'Nessun dato disponibile.' : 'Caricamento dati…';
+      ? t('errorPrefix', cache.errors._global)
+      : cache.updatedAt ? t('noData') : t('loading');
     content.appendChild(empty);
   }
 
   // Footer: orario ultimo aggiornamento + avviso se ci sono errori.
   const errCount = Object.keys(cache.errors).filter((k) => k !== '_global').length;
   const time = cache.updatedAt
-    ? new Date(cache.updatedAt).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })
+    ? new Date(cache.updatedAt).toLocaleTimeString(lang, { hour: '2-digit', minute: '2-digit' })
     : '—';
-  $('status').textContent = `Aggiornato alle ${time}` + (errCount ? ` · ${errCount} fonti con errori` : '') + ` · v${chrome.runtime.getManifest().version}`;
+  $('status').textContent = t('updatedAt', time) + (errCount ? t('sourcesWithErrors', String(errCount)) : '') + ` · v${chrome.runtime.getManifest().version}`;
   document.querySelector('footer').classList.toggle('stale', errCount > 0);
 
   return { settings, cache };
 }
 
 function showProblem(msg) {
-  $('status').textContent = `Errore: ${msg}`;
+  $('status').textContent = t('errorPrefix', msg);
   document.querySelector('footer').classList.add('stale');
   const empty = document.querySelector('.empty');
-  if (empty) empty.textContent = `Errore: ${msg}`;
+  if (empty) empty.textContent = t('errorPrefix', msg);
 }
 
 async function requestRefresh(force) {
@@ -156,7 +157,7 @@ async function requestRefresh(force) {
     if (res && res.ok === false) showProblem(res.error);
   } catch (e) {
     // Service worker non raggiungibile (es. errore di caricamento): lo rendo visibile.
-    showProblem(`service worker non raggiungibile (${e.message}). Controlla "Errori" in chrome://extensions`);
+    showProblem(t('swUnreachable', e.message));
   }
   btn.classList.remove('spin');
 }
@@ -169,6 +170,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
   if (area === 'local' && (changes.cache || changes.settings)) render();
 });
 
+localizeDom();
 (async () => {
   const { settings, cache } = await render();
   // All'apertura: rete solo se la cache è più vecchia dell'intervallo configurato.

@@ -1,0 +1,190 @@
+{
+  "extName": {
+    "message": "Market Pulse"
+  },
+  "extDescription": {
+    "message": "Yields, BTP/Bund spread, VIX and market status at a glance. No tracking."
+  },
+  "refreshNow": {
+    "message": "Refresh now"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "marketsStatus": {
+    "message": "Market status"
+  },
+  "group_rates": {
+    "message": "Yields & rates"
+  },
+  "group_market": {
+    "message": "Markets"
+  },
+  "asset_btp10": {
+    "message": "BTP 10Y"
+  },
+  "asset_bund10": {
+    "message": "Bund 10Y"
+  },
+  "asset_spread": {
+    "message": "BTP/Bund spread"
+  },
+  "asset_ea10": {
+    "message": "Euro area 10Y (AAA, ECB)"
+  },
+  "asset_ust10": {
+    "message": "US 10Y Treasury"
+  },
+  "asset_vix": {
+    "message": "VIX"
+  },
+  "asset_spx": {
+    "message": "S&P 500"
+  },
+  "asset_vwce": {
+    "message": "VWCE (FTSE All-World)"
+  },
+  "asset_eurusd": {
+    "message": "EUR/USD"
+  },
+  "asset_ftsemib": {
+    "message": "FTSE MIB"
+  },
+  "asset_dax": {
+    "message": "DAX"
+  },
+  "market_mi": {
+    "message": "Milan"
+  },
+  "market_fra": {
+    "message": "Frankfurt"
+  },
+  "market_ny": {
+    "message": "New York"
+  },
+  "marketOpen": {
+    "message": "open"
+  },
+  "marketClosed": {
+    "message": "closed"
+  },
+  "na": {
+    "message": "n/a"
+  },
+  "waitingData": {
+    "message": "waiting for data"
+  },
+  "notUpdated": {
+    "message": "⚠ not updated"
+  },
+  "monthlyData": {
+    "message": "monthly · $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "noData": {
+    "message": "No data available."
+  },
+  "loading": {
+    "message": "Loading data…"
+  },
+  "errorPrefix": {
+    "message": "Error: $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "updatedAt": {
+    "message": "Updated at $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourcesWithErrors": {
+    "message": " · $P1$ sources with errors",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "swUnreachable": {
+    "message": "service worker unreachable ($P1$). Check \"Errors\" in chrome://extensions",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "badgeTitleSpread": {
+    "message": "BTP/Bund spread: $P1$ bps",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "badgeTitleVix": {
+    "message": "VIX: $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "optionsTitle": {
+    "message": "Market Pulse – Settings"
+  },
+  "optionsHeading": {
+    "message": "Settings"
+  },
+  "activeAssets": {
+    "message": "Active assets"
+  },
+  "refreshSection": {
+    "message": "Refresh"
+  },
+  "refreshInterval": {
+    "message": "Refresh interval"
+  },
+  "minutes5": {
+    "message": "5 minutes"
+  },
+  "minutes15": {
+    "message": "15 minutes"
+  },
+  "minutes30": {
+    "message": "30 minutes"
+  },
+  "minutes60": {
+    "message": "60 minutes"
+  },
+  "badgeValue": {
+    "message": "Value shown on the icon badge"
+  },
+  "badgeSpread": {
+    "message": "BTP/Bund spread (bps)"
+  },
+  "badgeVix": {
+    "message": "VIX"
+  },
+  "badgeNone": {
+    "message": "None"
+  },
+  "noKeyHint": {
+    "message": "No API key needed: public endpoints only (Yahoo Finance, ECB)."
+  },
+  "save": {
+    "message": "Save"
+  },
+  "saved": {
+    "message": "Saved ✓"
+  }
+}

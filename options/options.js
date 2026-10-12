@@ -1,9 +1,11 @@
 // Pagina opzioni: asset attivi, intervallo, badge.
 import { ASSETS } from '../lib/config.js';
 import { getSettings, saveSettings } from '../lib/storage.js';
+import { assetLabel, localizeDom } from '../lib/i18n.js';
 
 const $ = (id) => document.getElementById(id);
 
+localizeDom();
 (async () => {
   const settings = await getSettings();
 
@@ -15,7 +17,7 @@ const $ = (id) => document.getElementById(id);
     cb.type = 'checkbox';
     cb.value = a.id;
     cb.checked = settings.enabledAssets.includes(a.id);
-    label.append(cb, document.createTextNode(a.label));
+    label.append(cb, document.createTextNode(assetLabel(a)));
     return label;
   }));
 

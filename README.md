@@ -17,3 +17,13 @@ Solo endpoint pubblici aperti, nessuna API key né registrazione.
 - Yahoo non offre simboli verificati per BTP/Bund giornalieri: per averli servirebbe un'altra fonte.
 - In caso di errore/rate limit resta l'ultimo dato in cache con avviso "non aggiornato".
 - Orari borse: festività non gestite.
+
+## Lingue
+Interfaccia in inglese (default) e italiano tramite `_locales/` e `chrome.i18n`: segue la lingua di Chrome.
+
+## Materiali per il Chrome Web Store
+`store/assets/` contiene icone, 4 screenshot 1280x800, riquadri promozionali 440x280 e 1400x560 e un video demo (en/it). Si rigenerano con:
+
+    NODE_PATH=$(npm root -g) node store/build_assets.mjs
+
+Richiede Playwright e ffmpeg. Popup e opzioni reali vengono renderizzati con dati di esempio (nessuna rete).

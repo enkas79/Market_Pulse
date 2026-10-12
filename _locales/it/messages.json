@@ -1,0 +1,190 @@
+{
+  "extName": {
+    "message": "Market Pulse"
+  },
+  "extDescription": {
+    "message": "Rendimenti, spread BTP/Bund, VIX e stato delle borse a colpo d'occhio. Nessun tracking."
+  },
+  "refreshNow": {
+    "message": "Aggiorna ora"
+  },
+  "settings": {
+    "message": "Impostazioni"
+  },
+  "marketsStatus": {
+    "message": "Stato delle borse"
+  },
+  "group_rates": {
+    "message": "Rendimenti e tassi"
+  },
+  "group_market": {
+    "message": "Mercati"
+  },
+  "asset_btp10": {
+    "message": "BTP 10Y"
+  },
+  "asset_bund10": {
+    "message": "Bund 10Y"
+  },
+  "asset_spread": {
+    "message": "Spread BTP/Bund"
+  },
+  "asset_ea10": {
+    "message": "Area euro 10Y (AAA, BCE)"
+  },
+  "asset_ust10": {
+    "message": "US 10Y Treasury"
+  },
+  "asset_vix": {
+    "message": "VIX"
+  },
+  "asset_spx": {
+    "message": "S&P 500"
+  },
+  "asset_vwce": {
+    "message": "VWCE (FTSE All-World)"
+  },
+  "asset_eurusd": {
+    "message": "EUR/USD"
+  },
+  "asset_ftsemib": {
+    "message": "FTSE MIB"
+  },
+  "asset_dax": {
+    "message": "DAX"
+  },
+  "market_mi": {
+    "message": "Milano"
+  },
+  "market_fra": {
+    "message": "Francoforte"
+  },
+  "market_ny": {
+    "message": "New York"
+  },
+  "marketOpen": {
+    "message": "aperta"
+  },
+  "marketClosed": {
+    "message": "chiusa"
+  },
+  "na": {
+    "message": "n/d"
+  },
+  "waitingData": {
+    "message": "in attesa di dati"
+  },
+  "notUpdated": {
+    "message": "⚠ non aggiornato"
+  },
+  "monthlyData": {
+    "message": "mensile · $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "noData": {
+    "message": "Nessun dato disponibile."
+  },
+  "loading": {
+    "message": "Caricamento dati…"
+  },
+  "errorPrefix": {
+    "message": "Errore: $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "updatedAt": {
+    "message": "Aggiornato alle $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourcesWithErrors": {
+    "message": " · $P1$ fonti con errori",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "swUnreachable": {
+    "message": "service worker non raggiungibile ($P1$). Controlla \"Errori\" in chrome://extensions",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "badgeTitleSpread": {
+    "message": "Spread BTP/Bund: $P1$ bps",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "badgeTitleVix": {
+    "message": "VIX: $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "optionsTitle": {
+    "message": "Market Pulse – Impostazioni"
+  },
+  "optionsHeading": {
+    "message": "Impostazioni"
+  },
+  "activeAssets": {
+    "message": "Asset attivi"
+  },
+  "refreshSection": {
+    "message": "Aggiornamento"
+  },
+  "refreshInterval": {
+    "message": "Intervallo di refresh"
+  },
+  "minutes5": {
+    "message": "5 minuti"
+  },
+  "minutes15": {
+    "message": "15 minuti"
+  },
+  "minutes30": {
+    "message": "30 minuti"
+  },
+  "minutes60": {
+    "message": "60 minuti"
+  },
+  "badgeValue": {
+    "message": "Valore sul badge dell'icona"
+  },
+  "badgeSpread": {
+    "message": "Spread BTP/Bund (bps)"
+  },
+  "badgeVix": {
+    "message": "VIX"
+  },
+  "badgeNone": {
+    "message": "Nessuno"
+  },
+  "noKeyHint": {
+    "message": "Nessuna API key necessaria: solo endpoint pubblici (Yahoo Finance, BCE)."
+  },
+  "save": {
+    "message": "Salva"
+  },
+  "saved": {
+    "message": "Salvato ✓"
+  }
+}
